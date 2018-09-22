@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>flip-number demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
+
+    <script type="module" src="../flip-number.js"></script>
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic flip-number demo</h3>
+      <demo-snippet class="centered-demo">
+        <template>
+          <flip-number></flip-number>
+        </template>
+      </demo-snippet>
+
+      <h3>Numbers can be displayed with decimals</h3>
+      <demo-snippet class="centered-demo">
+        <template>
+          <flip-number decimals="2"></flip-number>
+        </template>
+      </demo-snippet>
+
+      <h3>Duration of the animation can be changed</h3>
+      <demo-snippet class="centered-demo">
+        <template>
+          <flip-number duration="10"></flip-number>
+        </template>
+      </demo-snippet>
+
+      <h3>Values can be shown on page load</h3>
+      <demo-snippet class="centered-demo">
+        <template>
+          <flip-number value="12345"></flip-number>
+        </template>
+      </demo-snippet>
+
+      <label for="inp_number">Enter a number below:</label>
+      <input type="number" value="" id="inp_number">
+      <button type="button" onclick="change()">Change Value!</button>
+    </div>
+
+    <script>
+      function change() {
+        const flips = document.querySelectorAll('flip-number');
+        const num = document.querySelector('#inp_number').value;
+        flips.forEach(flip => {
+          flip.value = num;
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>flip-number test</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+
+    <script type="module" src="../flip-number.js"></script>
+  </head>
+  <body>
+
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <flip-number></flip-number>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="StaticFixture">
+      <template>
+        <flip-number></flip-number>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('flip-number', () => {
+        test('value is set as text', (done) => {
+          const element = fixture('BasicTestFixture');
+          element.value = 12345;
+          setTimeout(() => {
+            expect(element.shadowRoot.textContent).to.be.eql('12,345');
+            done();
+          }, 3000);
+        });
+      });
+
+      suite('flip-number _formatNumber', () => {
+        test('_formatNumber formats with the grouping separator', () => {
+          const element = fixture('StaticFixture');
+          const formatted = element._formatNumber(12345);
+          expect(formatted).to.be.eql('12,345');
+        });
+
+        test('_formatNumber rounds up to specific decimal places', () => {
+          const element = fixture('StaticFixture');
+          element.decimals = 2;
+          const formatted = element._formatNumber(12345.567);
+          expect(formatted).to.be.eql('12,345.57');
+        });
+
+        test('_formatNumber rounds down to specific decimal places', () => {
+          const element = fixture('StaticFixture');
+          element.decimals = 2;
+          const formatted = element._formatNumber(12345.432);
+          expect(formatted).to.be.eql('12,345.43');
+        });
+
+        test('_formatNumber handles negative numbers', () => {
+          const element = fixture('StaticFixture');
+          const formatted = element._formatNumber(-5753235);
+          expect(formatted).to.be.eql('-5,753,235');
+        });
+      });
+    </script>
+  </body>
+</html>
