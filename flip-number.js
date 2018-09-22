@@ -1,12 +1,30 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
 
 /**
- * `flip-number`
- * Flips to a number using an easing function
- *
- * @customElement
- * @polymer
- * @demo demo/index.html
+An element that animates (flips) between two numbers.
+
+Example:
+
+    <flip-number value="123456"></flip-number>
+
+### Styling
+
+Style the element with CSS as you would a normal DOM element.
+
+    flip-number.fancy {
+      border: 1px solid green;
+      color: red;
+    }
+
+The following custom properties and mixins are also available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--flip-number` | Mixin applied to the element | `{}`
+
+@customElement
+@polymer
+@demo demo/index.html
  */
 class FlipNumber extends PolymerElement {
   static get template() {
@@ -14,6 +32,8 @@ class FlipNumber extends PolymerElement {
       <style>
         :host {
           display: inline;
+
+          @apply --flip-number;
         }
       </style>
 
